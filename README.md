@@ -1,5 +1,18 @@
 # SRv6 FlexAlgo Telemetry Lab (Nokia SR OS)
 
+
+[![Discord][discord-svg]][discord-url] [![DevPod][devpod-svg]][devpod-url] [![Codespaces][codespaces-svg]][codespaces-url]  
+![w212][w212][Learn more](https://containerlab.dev/macos/#devpod) ![w90][w90][Learn more](https://containerlab.dev/manual/codespaces)
+
+[discord-svg]: https://gitlab.com/rdodin/pics/-/wikis/uploads/b822984bc95d77ba92d50109c66c7afe/join-discord-btn.svg
+[discord-url]: https://discord.gg/tZvgjQ6PZf
+[devpod-svg]: https://gitlab.com/rdodin/pics/-/wikis/uploads/dfc36636ecaa60f3e70340686d5800db/open-in-devpod-btn.svg
+[devpod-url]: https://devpod.sh/open#https://github.com/sros-labs/srv6-flexalgo-telemetry-lab
+[codespaces-svg]: https://gitlab.com/rdodin/pics/-/wikis/uploads/80546a8c7cda8bb14aa799d26f55bd83/run-codespaces-btn.svg
+[codespaces-url]: https://codespaces.new/sros-labs/srv6-flexalgo-telemetry-lab?quickstart=1&devcontainer_path=.devcontainer%2Fdocker-in-docker%2Fdevcontainer.json
+[w212]: https://gitlab.com/rdodin/pics/-/wikis/uploads/718a32dfa2b375cb07bcac50ae32964a/w212h1.svg
+[w90]: https://gitlab.com/rdodin/pics/-/wikis/uploads/bf1b8ea28b4528eb1b66567355a13c5c/w90h1.svg
+
 Objective: Creation of a traffic-engineered path based on SRv6 transport between 2 endpoints (R1 and R5) using delay as a metric to provide lowest latency connectivity between 2 clients over a L3VPN.
 * Transport: Base [SRv6](https://www.nokia.com/networks/ip-networks/segment-routing/) (end-dt46) and FlexAlgo 128 (with STAMP dynamic delay measurement)
 * Service: [EVPN](https://www.nokia.com/networks/ethernet-vpn/) IFL (Interface-less)
