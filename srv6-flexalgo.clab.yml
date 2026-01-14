@@ -11,6 +11,8 @@ topology:
     nokia_srsim:
       image: registry.srlinux.dev/pub/nokia_srsim:25.7.R1
       license: /opt/nokia/sros/license-25.txt
+      env:
+        CLAB_SROS_DISABLE_COMPONENT_CONFIG: "xyz"      
     linux:
       image: ghcr.io/hellt/network-multitool
 
