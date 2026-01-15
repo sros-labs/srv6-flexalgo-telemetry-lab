@@ -36,9 +36,8 @@ topology:
       components:
         - slot: A # containers will be attached to this Linux NS
         - slot: 1
-          type: cpm-ixr-r6d/iom-ixr-r6d # equivalent to override NOKIA_SROS_CARD
+          type: iom-ixr-r6d # equivalent to override NOKIA_SROS_CARD
           env:
-            NOKIA_SROS_SFM: cpm-ixr-r6d/iom-ixr-r6d
             NOKIA_SROS_MDA_1: m5-100g-qsfp28
       startup-config: configs/R3/R3.partial.cfg
 
@@ -56,7 +55,7 @@ topology:
       type: sr-1se
       components:
         - slot: A
-          type: cpm-sr-1se
+          type: cpm-1se
         - slot: 1
           env:
             NOKIA_SROS_CARD: imm36-800g-qsfpdd
