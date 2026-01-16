@@ -60,14 +60,14 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   R5:1/1/c1/1:
-    dataRef: oper-state:r5-a:1/1/c1/1
+    dataRef: oper-state:r5:1/1/c1/1
     fillColor:
       thresholds: *thresholds-operstate
   R5:1/1/c2/1:
-    dataRef: oper-state:r5-a:1/1/c2/1
+    dataRef: oper-state:r5:1/1/c2/1
     fillColor:
       thresholds: *thresholds-operstate
   R5:1/1/c3/1:
-    dataRef: oper-state:r5-a:1/1/c3/1
+    dataRef: oper-state:r5:1/1/c3/1
     fillColor:
       thresholds: *thresholds-operstate
