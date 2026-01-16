@@ -15,11 +15,16 @@ common_sros_subscriptions: &common_sros_subs
       - sros-system-performance
 
 targets:
-  R1: &common_sros_subs
-  R2: &common_sros_subs
-  R3-a: &common_sros_subs
-  R4: &common_sros_subs
-  R5-a: &common_sros_subs
+  R1: 
+    <<: *common_sros_subs
+  R2: 
+    <<: *common_sros_subs
+  R3: 
+    <<: *common_sros_subs
+  R4: 
+    <<: *common_sros_subs
+  R5: 
+    <<: *common_sros_subs
 
 subscriptions:
   ## SROS ###
