@@ -603,6 +603,11 @@ traceroute to 50.0.0.5, 30 hops max, 60 byte packets
 
 ## 📊 Telemetry Stack
 
+Nowadays, observability is becoming essential for every organisation.
+An open source GPG ([gnmic](https://gnmic.openconfig.net/)/[prometheus](https://prometheus.io/)/[grafana](https://grafana.com/)) telemetry stack is used to collect and report all the objects of interest via Telemetry/gRPC (links delay, interfaces state, metrics, cpu, mem, etc.).
+
+gnmic is then using prometheus TSDB as output for storing the metrics which can then be fetched by Grafana for monitoring (PromQL).
+
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
 ║                    TELEMETRY DATA FLOW                                ║
@@ -660,6 +665,10 @@ subscriptions:
 | **BGP Overview** | Peers, routes, states |
 | **System Resources** | CPU, memory utilization |
 | **Flow Visualization** | Traffic flow through the network |
+
+Using Grafana dashboard, it is possible to get direct correlation between the sum of TWAMP delay measurement on individual links and the IPv6 route table as shown below:
+
+![Screenshot 2024-03-04 at 1 03 17 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/36074d70-ab1a-419c-9584-15aa651eea39)
 
 ### Access Telemetry
 
@@ -764,21 +773,4 @@ This lab is provided for educational purposes. Nokia SR OS requires a valid lice
 
 </div>
 
-Nowadays, observability is becoming essential for every organisation.
-An open source GPG ([gnmic](https://gnmic.openconfig.net/)/[prometheus](https://prometheus.io/)/[grafana](https://grafana.com/)) telemetry stack is used to collect and report all the objects of interest via Telemetry/gRPC (links delay, interfaces state, metrics, cpu, mem, etc.):
-
-![Screenshot 2024-03-04 at 12 53 12 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/cafa2ed8-b933-4e48-9b67-b8001b72ae17)
-
-
-gnmic is then using prometheus TSDB as output for storing the metrics which can then be fetched by Grafana for monitoring (PromQL).
-
-Grafana dashboards are provided to check:
-* The state of the interfaces for each node
-* The latency on the links in "real" time (delay measurement interval via STAMP)
-* The number of BGP peers/routes per node
-* The CPU/memory per node
-
-Using Grafana dashboard, it is possible to get direct correlation between the sum of TWAMP delay measurement on individual links and the IPv6 route table as shown below:
-
-![Screenshot 2024-03-04 at 1 03 17 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/36074d70-ab1a-419c-9584-15aa651eea39)
 
