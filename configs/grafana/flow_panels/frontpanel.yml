@@ -32,19 +32,19 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   R3:1/1/c1/1:
-    dataRef: oper-state:r3-a:1/1/c1/1
+    dataRef: oper-state:r3:1/1/c1/1
     fillColor:
       thresholds: *thresholds-operstate
   R3:1/1/c2/1:
-    dataRef: oper-state:r3-a:1/1/c2/1
+    dataRef: oper-state:r3:1/1/c2/1
     fillColor:
       thresholds: *thresholds-operstate
   R3:1/1/c3/1:
-    dataRef: oper-state:r3-a:1/1/c3/1
+    dataRef: oper-state:r3:1/1/c3/1
     fillColor:
       thresholds: *thresholds-operstate
   R3:1/1/c4/1:
-    dataRef: oper-state:r3-a:1/1/c4/1
+    dataRef: oper-state:r3:1/1/c4/1
     fillColor:
       thresholds: *thresholds-operstate
   R4:1/1/c1/1:
