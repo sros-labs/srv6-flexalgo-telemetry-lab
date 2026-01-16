@@ -65,7 +65,7 @@
         "timeSliderEnabled": true,
         "timeSliderMode": "local"
       },
-      "pluginVersion": "1.18.5",
+      "pluginVersion": "1.20.1",
       "targets": [
         {
           "datasource": {
@@ -284,7 +284,7 @@
         "timeSliderEnabled": true,
         "timeSliderMode": "local"
       },
-      "pluginVersion": "1.18.5",
+      "pluginVersion": "1.20.1",
       "targets": [
         {
           "datasource": {
@@ -833,7 +833,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "r5-a Total Instant"
+                  "r2 Total Instant"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -977,7 +977,7 @@
                 "value": {
                   "legend": false,
                   "tooltip": false,
-                  "viz": true
+                  "viz": false
                 }
               }
             ]
