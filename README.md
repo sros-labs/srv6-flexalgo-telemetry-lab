@@ -154,47 +154,7 @@ SRv6 Address Structure
 
 ## 🗺️ Network Topology
 
-```
-                           Network Topology
-═══════════════════════════════════════════════════════════════════════
-
-                              CORE NETWORK
-                         (SRv6 + FlexAlgo 128)
-                   
-                        ┌─────────────────────┐
-                        │                     │
-     ┌───────────┐      │    ┌───────────┐    │       ┌───────────┐
-     │  Client1  │      │    │    R3     │    │       │  Client2  │
-     │172.17.11.2├──────┼────┤  IXR-R6D  ├────┼───────┤172.17.44.2│
-     └───────────┘      │    └─────┬─────┘    │       └───────────┘
-           │            │          │          │              │
-           │            │          │          │              │
-           ▼            │          │          │              ▼
-     ┌──────────┐       │    ┌─────▼─────┐    │       ┌──────────┐
-     │    R1    │───────┼────┤    R4     ├────┼───────┤    R5    │
-     │ IXR-e2c  │       │    │   SR-1    │    │       │  SR-1se  │
-     └────┬─────┘       │    └───────────┘    │       └──────────┘
-          │             │                     │
-          │             └─────────────────────┘
-          │
-          ▼
-     ┌──────────┐
-     │    R2    │
-     │  IXR-e2  │
-     └──────────┘
-
-
-                              LINK CONNECTIONS
-═══════════════════════════════════════════════════════════════════════
-
-     R1 ←──────→ R2    (e1-1-c1-1 ↔ e1-1-c7-1)
-     R1 ←──────→ R3    (e1-1-c2-1 ↔ e1-1-c4-1)
-     R2 ←──────→ R3    (e1-1-c5-1 ↔ e1-1-c1-1)
-     R2 ←──────→ R4    (e1-1-c6-1 ↔ e1-1-c1-1)
-     R3 ←──────→ R4    (e1-1-c3-1 ↔ e1-1-c3-1)
-     R3 ←──────→ R5    (e1-1-c2-1 ↔ e1-1-c1-1)
-     R4 ←──────→ R5    (e1-1-c2-1 ↔ e1-1-c2-1)
-```
+![Screenshot 2024-03-04 at 12 52 16 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/b76b684c-4b13-41a7-bfb9-e61d17e214cd)
 
 ### Router Types and Roles
 
@@ -810,8 +770,6 @@ An open source GPG ([gnmic](https://gnmic.openconfig.net/)/[prometheus](https://
 ![Screenshot 2024-03-04 at 12 53 12 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/cafa2ed8-b933-4e48-9b67-b8001b72ae17)
 
 
-Note: All Nokia SR OS YANG models are publicly available on: [https://github.com/nokia/7x50_YangModels](https://github.com/nokia/7x50_YangModels).
-
 gnmic is then using prometheus TSDB as output for storing the metrics which can then be fetched by Grafana for monitoring (PromQL).
 
 Grafana dashboards are provided to check:
@@ -819,11 +777,6 @@ Grafana dashboards are provided to check:
 * The latency on the links in "real" time (delay measurement interval via STAMP)
 * The number of BGP peers/routes per node
 * The CPU/memory per node
-
-## Network Topology
-
-![Screenshot 2024-03-04 at 12 52 16 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/b76b684c-4b13-41a7-bfb9-e61d17e214cd)
-
 
 Using Grafana dashboard, it is possible to get direct correlation between the sum of TWAMP delay measurement on individual links and the IPv6 route table as shown below:
 
