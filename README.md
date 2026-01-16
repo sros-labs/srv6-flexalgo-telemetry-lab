@@ -44,7 +44,7 @@ This lab demonstrates **traffic-engineered paths using SRv6 transport with FlexA
 
 An end-to-end SRv6 transport based on Nokia SR OS routers is spanning from Access/Aggregation using ([7250 IXR](https://www.nokia.com/networks/ip-networks/7250-interconnect-router/) Gen2/2c) to Edge/Core using ([7750 SR](https://www.nokia.com/networks/ip-networks/7750-service-router/), [FP4/FP5-based](https://www.nokia.com/networks/technologies/fp-network-processor-technology/)):
 
-![wan_nodes drawio](https://github.com/thcorre/SRv6-FlexAlgo-Telemetry-Lab-with-Nokia-SROS/assets/12113139/943a1061-fb6c-4263-9717-9e602507dc20)
+![wan_nodes drawio](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/943a1061-fb6c-4263-9717-9e602507dc20)
 
 ### 🎓 Learning Objectives
 
@@ -94,18 +94,18 @@ SRv6 Address Structure
                       ┌───────────────────────────────────────────────┐
                       │          FlexAlgo 128 (Delay Metric)          │
                       │                                               │
-          Client1     │    R1 ─────── R3 ─────── R5    ← Lowest      │
-             │        │     │   5ms    │   3ms    │       Delay      │
-             │        │     │          │          │       Path       │
-             │        │     ▼          ▼          │                  │
-             │        │    R2 ─────── R4 ─────────┘                  │
-             │        │        15ms        10ms                      │
+          Client1     │    R1 ─────── R3 ─────── R5    ← Lowest       │
+             │        │     │   5ms    │   3ms    │       Delay       │
+             │        │     │          │          │       Path        │
+             │        │     ▼          ▼          │                   │
+             │        │    R2 ─────── R4 ─────────┘                   │
+             │        │        15ms        10ms                       │
              │        └───────────────────────────────────────────────┘
              │
              │        ┌───────────────────────────────────────────────┐
-             │        │          Algorithm 0 (IGP Metric)            │
+             │        │          Algorithm 0 (IGP Metric)             │
              │        │                                               │
-             └──────► │    R1 ─────── R2 ─────── R4 ─────── R5       │
+             └──────► │    R1 ─────── R2 ─────── R4 ─────── R5        │
                       │         10        10        10                │
                       │                                               │
                       │    Shortest hop count path                    │
@@ -121,7 +121,7 @@ SRv6 Address Structure
 │         flexible-algorithm-definitions {                            │
 │             flex-algo "flexalgo-128" {                              │
 │                 admin-state enable                                  │
-│                 metric-type delay    ◄── Use delay instead of IGP  │
+│                 metric-type delay    ◄── Use delay instead of IGP   │
 │             }                                                       │
 │         }                                                           │
 │     }                                                               │
@@ -140,7 +140,7 @@ SRv6 Address Structure
 │     segment-routing {                                               │
 │         segment-routing-v6 {                                        │
 │             locator "loc-128" {                                     │
-│                 algorithm 128        ◄── Bind to FlexAlgo 128      │
+│                 algorithm 128        ◄── Bind to FlexAlgo 128       │
 │                 prefix {                                            │
 │                     ip-prefix c128:db8:aaa:101::/64                 │
 │                 }                                                   │
@@ -155,7 +155,7 @@ SRv6 Address Structure
 ## 🗺️ Network Topology
 
 ```
-                                Network Topology
+                           Network Topology
 ═══════════════════════════════════════════════════════════════════════
 
                               CORE NETWORK
@@ -163,10 +163,10 @@ SRv6 Address Structure
                    
                         ┌─────────────────────┐
                         │                     │
-     ┌──────────┐       │    ┌───────────┐    │       ┌──────────┐
-     │ Client1  │       │    │    R3     │    │       │ Client2  │
+     ┌───────────┐      │    ┌───────────┐    │       ┌───────────┐
+     │  Client1  │      │    │    R3     │    │       │  Client2  │
      │172.17.11.2├──────┼────┤  IXR-R6D  ├────┼───────┤172.17.44.2│
-     └──────────┘       │    └─────┬─────┘    │       └──────────┘
+     └───────────┘      │    └─────┬─────┘    │       └───────────┘
            │            │          │          │              │
            │            │          │          │              │
            ▼            │          │          │              ▼
@@ -249,63 +249,63 @@ topology:
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║                    SRv6 CONFIGURATION HIERARCHY                        ║
+║                    SRv6 CONFIGURATION HIERARCHY                       ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                        ║
+║                                                                       ║
 ║  ┌─────────────────────────────────────────────────────────────────┐  ║
 ║  │ 1. GLOBAL SRV6 LOCATORS (segment-routing context)               │  ║
-║  │                                                                  │  ║
-║  │    segment-routing {                                             │  ║
-║  │        segment-routing-v6 {                                      │  ║
-║  │            locator "loc-0" {              ◄── Algorithm 0        │  ║
-║  │                admin-state enable                                │  ║
-║  │                block-length 48            ◄── Prefix portion     │  ║
-║  │                prefix {                                          │  ║
-║  │                    ip-prefix c000:db8:aaa:101::/64               │  ║
-║  │                }                                                 │  ║
-║  │            }                                                     │  ║
-║  │            locator "loc-128" {            ◄── FlexAlgo 128       │  ║
-║  │                admin-state enable                                │  ║
-║  │                block-length 48                                   │  ║
-║  │                algorithm 128              ◄── Bound to FlexAlgo  │  ║
-║  │                prefix {                                          │  ║
-║  │                    ip-prefix c128:db8:aaa:101::/64               │  ║
-║  │                }                                                 │  ║
-║  │            }                                                     │  ║
-║  │        }                                                         │  ║
-║  │    }                                                             │  ║
+║  │                                                                 │  ║
+║  │    segment-routing {                                            │  ║
+║  │        segment-routing-v6 {                                     │  ║
+║  │            locator "loc-0" {              ◄── Algorithm 0       │  ║
+║  │                admin-state enable                               │  ║
+║  │                block-length 48            ◄── Prefix portion    │  ║
+║  │                prefix {                                         │  ║
+║  │                    ip-prefix c000:db8:aaa:101::/64              │  ║
+║  │                }                                                │  ║
+║  │            }                                                    │  ║
+║  │            locator "loc-128" {            ◄── FlexAlgo 128      │  ║
+║  │                admin-state enable                               │  ║
+║  │                block-length 48                                  │  ║
+║  │                algorithm 128              ◄── Bound to FlexAlgo │  ║
+║  │                prefix {                                         │  ║
+║  │                    ip-prefix c128:db8:aaa:101::/64              │  ║
+║  │                }                                                │  ║
+║  │            }                                                    │  ║
+║  │        }                                                        │  ║
+║  │    }                                                            │  ║
 ║  └─────────────────────────────────────────────────────────────────┘  ║
-║                                                                        ║
+║                                                                       ║
 ║  ┌─────────────────────────────────────────────────────────────────┐  ║
 ║  │ 2. ISIS SRV6 ADVERTISEMENT                                      │  ║
-║  │                                                                  │  ║
-║  │    isis 0 {                                                      │  ║
-║  │        segment-routing-v6 {                                      │  ║
-║  │            admin-state enable                                    │  ║
-║  │            locator "loc-0" {                                     │  ║
-║  │                level-capability 2         ◄── Advertise in L2    │  ║
-║  │            }                                                     │  ║
-║  │            locator "loc-128" {                                   │  ║
-║  │                level-capability 2                                │  ║
-║  │            }                                                     │  ║
-║  │        }                                                         │  ║
-║  │    }                                                             │  ║
+║  │                                                                 │  ║
+║  │    isis 0 {                                                     │  ║
+║  │        segment-routing-v6 {                                     │  ║
+║  │            admin-state enable                                   │  ║
+║  │            locator "loc-0" {                                    │  ║
+║  │                level-capability 2         ◄── Advertise in L2   │  ║
+║  │            }                                                    │  ║
+║  │            locator "loc-128" {                                  │  ║
+║  │                level-capability 2                               │  ║
+║  │            }                                                    │  ║
+║  │        }                                                        │  ║
+║  │    }                                                            │  ║
 ║  └─────────────────────────────────────────────────────────────────┘  ║
-║                                                                        ║
+║                                                                       ║
 ║  ┌─────────────────────────────────────────────────────────────────┐  ║
 ║  │ 3. SRV6 FUNCTIONS FOR BASE ROUTING                              │  ║
-║  │                                                                  │  ║
-║  │    base-routing-instance {                                       │  ║
-║  │        locator "loc-0" {                                         │  ║
-║  │            function {                                            │  ║
-║  │                end 1 {                    ◄── Node SID           │  ║
-║  │                    srh-mode usp           ◄── Ultimate Segment   │  ║
-║  │                }                               Pop                │  ║
-║  │                end-x-auto-allocate usp    ◄── Adjacency SIDs     │  ║
-║  │                    protection protected                          │  ║
-║  │            }                                                     │  ║
-║  │        }                                                         │  ║
-║  │    }                                                             │  ║
+║  │                                                                 │  ║
+║  │    base-routing-instance {                                      │  ║
+║  │        locator "loc-0" {                                        │  ║
+║  │            function {                                           │  ║
+║  │                end 1 {                    ◄── Node SID          │  ║
+║  │                    srh-mode usp           ◄── Ultimate Segment  │  ║
+║  │                }                               Pop              │  ║
+║  │                end-x-auto-allocate usp    ◄── Adjacency SIDs    │  ║
+║  │                    protection protected                         │  ║
+║  │            }                                                    │  ║
+║  │        }                                                        │  ║
+║  │    }                                                            │  ║
 ║  └─────────────────────────────────────────────────────────────────┘  ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
@@ -314,27 +314,27 @@ topology:
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║                    VPRN 50 - FlexAlgo 128 Service                      ║
+║                    VPRN 50 - FlexAlgo 128 Service                     ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                        ║
-║    service {                                                           ║
-║        vprn "50" {                                                     ║
-║            admin-state enable                                          ║
-║            description "vprn_using_flex-algo_128_srv6"                 ║
-║            customer "1"                                                ║
-║                                                                        ║
+║                                                                       ║
+║    service {                                                          ║
+║        vprn "50" {                                                    ║
+║            admin-state enable                                         ║
+║            description "vprn_using_flex-algo_128_srv6"                ║
+║            customer "1"                                               ║
+║                                                                       ║
 ║            ┌───────────────────────────────────────────────────────┐  ║
-║            │  SRv6 Instance - Binds service to FlexAlgo locator   │  ║
+║            │  SRv6 Instance - Binds service to FlexAlgo locator    │  ║
 ║            │                                                       │  ║
 ║            │  segment-routing-v6 1 {                               │  ║
-║            │      locator "loc-128" {    ◄── Uses FlexAlgo 128    │  ║
+║            │      locator "loc-128" {    ◄── Uses FlexAlgo 128     │  ║
 ║            │          function {                                   │  ║
-║            │              end-dt46 { }   ◄── Decap & VRF lookup   │  ║
+║            │              end-dt46 { }   ◄── Decap & VRF lookup    │  ║
 ║            │          }                                            │  ║
 ║            │      }                                                │  ║
 ║            │  }                                                    │  ║
 ║            └───────────────────────────────────────────────────────┘  ║
-║                                                                        ║
+║                                                                       ║
 ║            ┌───────────────────────────────────────────────────────┐  ║
 ║            │  BGP-EVPN Control Plane                               │  ║
 ║            │                                                       │  ║
@@ -355,7 +355,7 @@ topology:
 ║            │      }                                                │  ║
 ║            │  }                                                    │  ║
 ║            └───────────────────────────────────────────────────────┘  ║
-║                                                                        ║
+║                                                                       ║
 ║            ┌───────────────────────────────────────────────────────┐  ║
 ║            │  Customer Interface                                   │  ║
 ║            │                                                       │  ║
@@ -366,28 +366,28 @@ topology:
 ║            │              prefix-length 30                         │  ║
 ║            │          }                                            │  ║
 ║            │      }                                                │  ║
-║            │      sap 1/1/c3/1 { }        ◄── Service Access Point│  ║
+║            │      sap 1/1/c3/1 { }        ◄── Service Access Point │  ║
 ║            │  }                                                    │  ║
 ║            └───────────────────────────────────────────────────────┘  ║
-║        }                                                               ║
-║    }                                                                   ║
+║        }                                                              ║
+║    }                                                                  ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
 ### 📋 TWAMP-Light Delay Measurement
 
 ```
-╔═══════════════════════════════════════════════════════════════════════╗
+╔════════════════════════════════════════════════════════════════════════╗
 ║                    DYNAMIC DELAY MEASUREMENT                           ║
-╠═══════════════════════════════════════════════════════════════════════╣
+╠════════════════════════════════════════════════════════════════════════╣
 ║                                                                        ║
-║  ┌─────────────────────────────────────────────────────────────────┐  ║
+║  ┌──────────────────────────────────────────────────────────────────┐  ║
 ║  │ Interface Delay Configuration                                    │  ║
 ║  │                                                                  │  ║
 ║  │    interface "to-R3" {                                           │  ║
 ║  │        if-attribute {                                            │  ║
 ║  │            delay {                                               │  ║
-║  │                delay-selection dynamic  ◄── Use measured delay  │  ║
+║  │                delay-selection dynamic  ◄── Use measured delay   │  ║
 ║  │                dynamic {                                         │  ║
 ║  │                    measurement-template "standard-direct"        │  ║
 ║  │                    twamp-light {                                 │  ║
@@ -399,69 +399,69 @@ topology:
 ║  │            }                                                     │  ║
 ║  │        }                                                         │  ║
 ║  │    }                                                             │  ║
-║  └─────────────────────────────────────────────────────────────────┘  ║
+║  └──────────────────────────────────────────────────────────────────┘  ║
 ║                                                                        ║
-║  ┌─────────────────────────────────────────────────────────────────┐  ║
-║  │ TWAMP-Light Reflector (responds to probes)                      │  ║
+║  ┌──────────────────────────────────────────────────────────────────┐  ║
+║  │ TWAMP-Light Reflector (responds to probes)                       │  ║
 ║  │                                                                  │  ║
 ║  │    twamp-light {                                                 │  ║
 ║  │        reflector {                                               │  ║
 ║  │            admin-state enable                                    │  ║
-║  │            udp-port 862              ◄── Standard TWAMP port    │  ║
-║  │            prefix 0.0.0.0/0 { }      ◄── Accept from any source │  ║
+║  │            udp-port 862              ◄── Standard TWAMP port     │  ║
+║  │            prefix 0.0.0.0/0 { }      ◄── Accept from any source  │  ║
 ║  │        }                                                         │  ║
 ║  │    }                                                             │  ║
-║  └─────────────────────────────────────────────────────────────────┘  ║
+║  └──────────────────────────────────────────────────────────────────┘  ║
 ║                                                                        ║
-║  ┌─────────────────────────────────────────────────────────────────┐  ║
-║  │ Measurement Template                                            │  ║
+║  ┌──────────────────────────────────────────────────────────────────┐  ║
+║  │ Measurement Template                                             │  ║
 ║  │                                                                  │  ║
 ║  │    test-oam {                                                    │  ║
 ║  │        link-measurement {                                        │  ║
 ║  │            measurement-template "standard-direct" {              │  ║
 ║  │                admin-state enable                                │  ║
 ║  │                aggregate-sample-window {                         │  ║
-║  │                    multiplier 5         ◄── 5 samples per window│  ║
+║  │                    multiplier 5         ◄── 5 samples per window │  ║
 ║  │                    window-integrity 1                            │  ║
 ║  │                    threshold {                                   │  ║
-║  │                        relative 50      ◄── % change threshold  │  ║
-║  │                        absolute 50      ◄── Absolute threshold  │  ║
+║  │                        relative 50      ◄── % change threshold   │  ║
+║  │                        absolute 50      ◄── Absolute threshold   │  ║
 ║  │                    }                                             │  ║
 ║  │                }                                                 │  ║
 ║  │            }                                                     │  ║
 ║  │        }                                                         │  ║
 ║  │    }                                                             │  ║
-║  └─────────────────────────────────────────────────────────────────┘  ║
-╚═══════════════════════════════════════════════════════════════════════╝
+║  └──────────────────────────────────────────────────────────────────┘  ║
+╚════════════════════════════════════════════════════════════════════════╝
 ```
 
 ### 📋 Policy for FlexAlgo Route Import
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║                    FLEXALGO IMPORT POLICY                              ║
+║                    FLEXALGO IMPORT POLICY                             ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                        ║
-║    policy-options {                                                    ║
-║        community "vprn50" {                                            ║
-║            member "target:100:50" { }                                  ║
-║        }                                                               ║
-║                                                                        ║
-║        policy-statement "vprn50" {                                     ║
-║            entry 10 {                                                  ║
-║                from {                                                  ║
-║                    community {                                         ║
-║                        name "vprn50"        ◄── Match RT community   ║
-║                    }                                                   ║
-║                }                                                       ║
-║                action {                                                ║
-║                    action-type accept                                  ║
-║                    flex-algo 128            ◄── Force FlexAlgo 128   ║
+║                                                                       ║
+║    policy-options {                                                   ║
+║        community "vprn50" {                                           ║
+║            member "target:100:50" { }                                 ║
+║        }                                                              ║
+║                                                                       ║
+║        policy-statement "vprn50" {                                    ║
+║            entry 10 {                                                 ║
+║                from {                                                 ║
+║                    community {                                        ║
+║                        name "vprn50"        ◄── Match RT community    ║
+║                    }                                                  ║
+║                }                                                      ║
+║                action {                                               ║
+║                    action-type accept                                 ║
+║                    flex-algo 128            ◄── Force FlexAlgo 128    ║
 ║                }                              resolution for routes   ║
-║            }                                                           ║
-║        }                                                               ║
-║    }                                                                   ║
-║                                                                        ║
+║            }                                                          ║
+║        }                                                              ║
+║    }                                                                  ║
+║                                                                       ║
 ║    This ensures all VPRN 50 routes use the delay-optimized path!      ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
@@ -645,9 +645,9 @@ traceroute to 50.0.0.5, 30 hops max, 60 byte packets
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║                    TELEMETRY DATA FLOW                                 ║
+║                    TELEMETRY DATA FLOW                                ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║                                                                        ║
+║                                                                       ║
 ║    ┌─────────┐   gNMI Subscribe    ┌─────────┐                        ║
 ║    │   R1    │ ─────────────────►  │         │                        ║
 ║    └─────────┘                     │         │                        ║
@@ -675,7 +675,7 @@ traceroute to 50.0.0.5, 30 hops max, 60 byte packets
 ║                                  │   Grafana   │                      ║
 ║                                  │   :3000     │                      ║
 ║                                  └─────────────┘                      ║
-║                                                                        ║
+║                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -807,21 +807,8 @@ This lab is provided for educational purposes. Nokia SR OS requires a valid lice
 Nowadays, observability is becoming essential for every organisation.
 An open source GPG ([gnmic](https://gnmic.openconfig.net/)/[prometheus](https://prometheus.io/)/[grafana](https://grafana.com/)) telemetry stack is used to collect and report all the objects of interest via Telemetry/gRPC (links delay, interfaces state, metrics, cpu, mem, etc.):
 
-![Screenshot 2024-03-04 at 12 53 12 PM](https://github.com/thcorre/SRv6-FlexAlgo-Telemetry-Lab-with-Nokia-SROS/assets/12113139/cafa2ed8-b933-4e48-9b67-b8001b72ae17)
+![Screenshot 2024-03-04 at 12 53 12 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/cafa2ed8-b933-4e48-9b67-b8001b72ae17)
 
-gnmic is collecting streaming telemetry data (push-based approach from devices) from all routers with a 5s sampling interval via subscription to certain paths of interest:
-
-      - /state/router[router-name=Base]/interface[interface-name=*]/statistics
-      - /state/router[router-name=*]/interface[interface-name=*]/oper-state
-      - /state/service/vprn[service-name=50]/interface[interface-name=*]/oper-state
-      - /state/service/vprn[service-name=50]/interface[interface-name=*]/statistics
-      - /state/test-oam/link-measurement/router[router-instance=Base]/interface[interface-name=*]/last-reported-delay
-      - /state/system/cpu[sample-period=60]/summary/usage/
-      - /state/system/memory-pools/summary/
-      - /state/router[router-name=Base]/route-table/unicast/ipv6
-      - /state/router[router-name=Base]/bgp/statistics/peers
-      - /state/router[router-name=Base]/bgp/statistics/routes-per-family/vpn-ipv4/remote-active-routes
-      - /state/router[router-name=Base]/bgp/statistics/routes-per-family/vpn-ipv6/remote-active-routes
 
 Note: All Nokia SR OS YANG models are publicly available on: [https://github.com/nokia/7x50_YangModels](https://github.com/nokia/7x50_YangModels).
 
@@ -835,10 +822,10 @@ Grafana dashboards are provided to check:
 
 ## Network Topology
 
-![Screenshot 2024-03-04 at 12 52 16 PM](https://github.com/thcorre/SRv6-FlexAlgo-Telemetry-Lab-with-Nokia-SROS/assets/12113139/b76b684c-4b13-41a7-bfb9-e61d17e214cd)
+![Screenshot 2024-03-04 at 12 52 16 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/b76b684c-4b13-41a7-bfb9-e61d17e214cd)
 
 
 Using Grafana dashboard, it is possible to get direct correlation between the sum of TWAMP delay measurement on individual links and the IPv6 route table as shown below:
 
-![Screenshot 2024-03-04 at 1 03 17 PM](https://github.com/thcorre/SRv6-FlexAlgo-Telemetry-Lab-with-Nokia-SROS/assets/12113139/36074d70-ab1a-419c-9584-15aa651eea39)
+![Screenshot 2024-03-04 at 1 03 17 PM](https://github.com/sros-labs/srv6-flexalgo-telemetry-lab/assets/12113139/36074d70-ab1a-419c-9584-15aa651eea39)
 
