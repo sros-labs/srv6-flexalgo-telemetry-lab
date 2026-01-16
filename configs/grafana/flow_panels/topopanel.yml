@@ -88,7 +88,7 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R3:1/1/c4/1:R1:1/1/c2/1:
-    dataRef: r3-a:1/1/c4/1:out
+    dataRef: r3:1/1/c4/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
@@ -97,7 +97,7 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R3:1/1/c1/1:R2:1/1/c5/1:
-    dataRef: r3-a:1/1/c1/1:out
+    dataRef: r3:1/1/c1/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
@@ -106,24 +106,24 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R3:1/1/c2/1:R5:1/1/c1/1:
-    dataRef: r3-a:1/1/c2/1:out
+    dataRef: r3:1/1/c2/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
   delay:R3:1/1/c2/1:R5:1/1/c1/1:
-    dataRef: r3-a:to-R5:delay
+    dataRef: r3:to-R5:delay
     label: *delay-label-config
   R3:1/1/c3/1:R4:1/1/c3/1:
     dataRef: oper-state:r3:1/1/c3/1
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R3:1/1/c3/1:R4:1/1/c3/1:
-    dataRef: r3-a:1/1/c3/1:out
+    dataRef: r3:1/1/c3/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
   delay:R3:1/1/c3/1:R4:1/1/c3/1:
-    dataRef: r3-a:to-R4:delay
+    dataRef: r3:to-R4:delay
     label: *delay-label-config
   R4:1/1/c1/1:R2:1/1/c6/1:
     dataRef: oper-state:r4:1/1/c1/1
@@ -160,7 +160,7 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R5:1/1/c1/1:R3:1/1/c2/1:
-    dataRef: r5-a:1/1/c1/1:out
+    dataRef: r5:1/1/c1/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
@@ -169,7 +169,7 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R5:1/1/c2/1:R4:1/1/c2/1:
-    dataRef: r5-a:1/1/c2/1:out
+    dataRef: r5:1/1/c2/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
@@ -192,12 +192,12 @@ cells:
     fillColor:
       thresholds: *thresholds-operstate
   link_id:R5:1/1/c3/1:client2:eth1:
-    dataRef: r5-a:1/1/c3/1:out
+    dataRef: r5:1/1/c3/1:out
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
   link_id:client2:eth1:R5:1/1/c3/1:
-    dataRef: r5-a:1/1/c3/1:in
+    dataRef: r5:1/1/c3/1:in
     label: *label-config
     strokeColor:
       thresholds: *thresholds-traffic
