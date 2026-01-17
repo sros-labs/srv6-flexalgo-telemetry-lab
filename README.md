@@ -69,13 +69,13 @@ SRv6 Address Structure
 
          ◄────── Locator (64 bits) ──────►◄──── Function (16 bits) ─►
          ┌────────────────────────────────┬─────────────────────────┐
-         │  c128:0db8:0aaa:0101           │  0001 (End)             │
-         │                                │  0040 (End.DT46)        │
-         │  Identifies the node           │  0041 (End.X)           │
+         │     c128:0db8:0aaa:0101        │       0001 (End)        │
+         │                                │       0040 (End.DT46)   │
+         │     Identifies the node        │       0041 (End.X)      │
          └────────────────────────────────┴─────────────────────────┘
-                      │                              │
-                      ▼                              ▼
-              "Route to me"                 "What to do here"
+                      │                                │
+                      ▼                                ▼
+                "Route to me"                  "What to do here"
 ```
 
 #### SRv6 Functions Used in This Lab
@@ -106,7 +106,7 @@ SRv6 Address Structure
              │        │          Algorithm 0 (IGP Metric)             │
              │        │                                               │
              └──────► │    R1 ─────── R2 ─────── R4 ─────── R5        │
-                      │         10        10        10                │
+                      │          10         10        10              │
                       │                                               │
                       │    Shortest hop count path                    │
                       └───────────────────────────────────────────────┘
@@ -160,11 +160,11 @@ SRv6 Address Structure
 
 | Node | Chassis Type | Role | SRv6 Locators |
 |------|--------------|------|---------------|
-| **R1** | 7250 IXR-e2c | PE (Customer Edge) | `c000:db8:aaa:101::/64` (Algo 0)<br>`c128:db8:aaa:101::/64` (Algo 128) |
+| **R1** | 7250 IXR-e2c | PE (Provider Edge) | `c000:db8:aaa:101::/64` (Algo 0)<br>`c128:db8:aaa:101::/64` (Algo 128) |
 | **R2** | 7250 IXR-e2 | P (Transit) | `c000:db8:aaa:102::/64` (Algo 0)<br>`c128:db8:aaa:102::/64` (Algo 128) |
 | **R3** | 7250 IXR-R6D | P (Transit) | `c000:db8:aaa:103::/64` (Algo 0)<br>`c128:db8:aaa:103::/64` (Algo 128) |
 | **R4** | 7750 SR-1 | P (Transit) | `c000:db8:aaa:104::/64` (Algo 0)<br>`c128:db8:aaa:104::/64` (Algo 128) |
-| **R5** | 7750 SR-1se | PE (Customer Edge) | `c000:db8:aaa:105::/64` (Algo 0)<br>`c128:db8:aaa:105::/64` (Algo 128) |
+| **R5** | 7750 SR-1se | PE (Provider Edge) | `c000:db8:aaa:105::/64` (Algo 0)<br>`c128:db8:aaa:105::/64` (Algo 128) |
 
 ---
 
