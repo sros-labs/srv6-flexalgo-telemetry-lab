@@ -24,7 +24,7 @@
 - [🗺️ Network Topology](#️-network-topology)
 - [⚙️ SR-SIM Configuration Deep Dive](#️-sr-sim-configuration-deep-dive)
 - [🚀 Quick Start](#-quick-start)
-- [🔬 Interactive Lab Exercises](#-interactive-lab-exercises)
+- [🔬 Checking the Lab](#-checking-the-lab)
 - [📊 Telemetry Stack](#-telemetry-stack)
 - [🔧 Traffic Generation & Delay Manipulation](#-traffic-generation--delay-manipulation)
 - [📚 References](#-references)
