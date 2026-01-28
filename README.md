@@ -94,14 +94,14 @@ SRv6 Address Structure
                       ┌───────────────────────────────────────────────┐
                       │          FlexAlgo 128 (Delay Metric)          │
                       │                                               │
-          Client1     │    R1 ─────── R3 ─────── R5    ← Lowest       │
+             ┌──────► │    R1 ─────── R3 ─────── R5    ← Lowest       │
              │        │     │   5ms    │   3ms    │       Delay       │
              │        │     │          │          │       Path        │
              │        │     ▼          ▼          │                   │
              │        │    R2 ─────── R4 ─────────┘                   │
              │        │        15ms        10ms                       │
              │        └───────────────────────────────────────────────┘
-             │
+Client1  ────│  or       
              │        ┌───────────────────────────────────────────────┐
              │        │          Algorithm 0 (IGP Metric)             │
              │        │                                               │
@@ -179,7 +179,7 @@ The lab uses `nokia_srsim` kind for SR OS simulation:
 topology:
   kinds:
     nokia_srsim:
-      image: registry.srlinux.dev/pub/nokia_srsim:25.7.R1
+      image: registry.srlinux.dev/pub/nokia_srsim:25.10.R1
       license: /opt/nokia/sros/license-25.txt
       env:
         CLAB_SROS_DISABLE_COMPONENT_CONFIG: "xyz"
@@ -613,15 +613,15 @@ gnmic is then using prometheus TSDB as output for storing the metrics which can 
 ║                    TELEMETRY DATA FLOW                                ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║                                                                       ║
-║    ┌─────────┐   gNMI Subscribe    ┌─────────┐                        ║
-║    │   R1    │ ─────────────────►  │         │                        ║
-║    └─────────┘                     │         │                        ║
+║                                    ┌─────────┐                        ║
+║                                    │         │                        ║
+║                                    │         │                        ║
 ║    ┌─────────┐   gNMI Subscribe    │  gNMIc  │                        ║
-║    │   R2    │ ─────────────────►  │         │                        ║
+║    │  R1-R5  │ ─────────────────►  │         │                        ║
 ║    └─────────┘                     │  :9804  │                        ║
-║    ┌─────────┐   gNMI Subscribe    │         │                        ║
-║    │  R3-R5  │ ─────────────────►  │         │                        ║
-║    └─────────┘                     └────┬────┘                        ║
+║                                    │         │                        ║
+║                                    │         │                        ║
+║                                    └────┬────┘                        ║
 ║                                         │                             ║
 ║                                    Prometheus                         ║
 ║                                    Remote Write                       ║
