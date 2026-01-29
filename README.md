@@ -101,7 +101,7 @@ SRv6 Address Structure
              │        │    R2 ─────── R4 ─────────┘                   │
              │        │        15ms        10ms                       │
              │        └───────────────────────────────────────────────┘
-Client1  ────│  or       
+Client1  ────│ OR       
              │        ┌───────────────────────────────────────────────┐
              │        │          Algorithm 0 (IGP Metric)             │
              │        │                                               │
@@ -179,7 +179,7 @@ The lab uses `nokia_srsim` kind for SR OS simulation:
 topology:
   kinds:
     nokia_srsim:
-      image: registry.srlinux.dev/pub/nokia_srsim:25.10.R1
+      image: registry.srlinux.dev/pub/nokia_srsim:25.10.R2
       license: /opt/nokia/sros/license-25.txt
       env:
         CLAB_SROS_DISABLE_COMPONENT_CONFIG: "xyz"
@@ -455,7 +455,7 @@ cd srv6-flexalgo-telemetry-lab
 # Deploy the lab
 clab deploy --reconfigure
 
-# Wait for all nodes to boot (approximately 2-3 minutes for SR-SIM)
+# Wait for all nodes to boot (approximately 2 minutes for SR-SIM)
 watch -n 5 'docker ps --format "table {{.Names}}\t{{.Status}}"'
 ```
 
@@ -483,15 +483,15 @@ open http://localhost:9090   # Prometheus
 ```
 A:admin@R1# show router segment-routing srv6 locator 
 
-===============================================================================
+=========================================================================================
 Segment Routing v6 Locators
-===============================================================================
+=========================================================================================
 Name                              Admin   Operational  Function    Prefix
                                   State   State        Count
--------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 loc-0                             Up      Up           3           c000:db8:aaa:101::/64
 loc-128                           Up      Up           3           c128:db8:aaa:101::/64
--------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 No. of SRv6 Locators: 2
 ```
 
